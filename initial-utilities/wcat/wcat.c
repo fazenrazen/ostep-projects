@@ -6,47 +6,30 @@ int BUFLEN = 1000;
 int main(int argc, char *argv[]) {
     
     int num_files = argc;
-    FILE *fp = fopen(argv[1], "r");
-
     char buffer[BUFLEN];
-    char cool[BUFLEN];
 
-    fgets(buffer, BUFLEN, fp);
-    fgets(buffer, BUFLEN, fp);
+    // iterate through all files 
+    for(int file = 1; file < num_files; file++) {
+        // iterate through all lines - end at EOF
+        FILE *fp = fopen(argv[file], "r");
 
-    printf("%s", buffer);
-    printf("%s", buffer);
+        // check if NULL is error
+        if(fp == NULL && ferror(fp)) {
+            printf("cannot open file, errored out \n");
+            exit(1);
+        }
+        else if(fp == NULL && feof(fp)) {
+            printf("cannot open file, end of file \n");
+            exit(1);
+        }
 
+        // read the whole program
+        while(!feof(fp)) {
+            // print process
+            fgets(buffer, BUFLEN, fp);
+            printf("%s", buffer);
+        }
+    }
 
-
-
-
-    // Enumerate between files - skip command arg hence file = 1
-    // for(int file = 1; file < num_files; file++) {
-    //     // Open a file
-    //     FILE *fp = fopen(argv[file], "r");
-
-    //     // Check if the file open correctly
-    //     if(fp == NULL) {
-    //         printf("cannot open file \n");
-    //         //strerror(fp);
-    //         exit(1);
-    //     }
-
-    //     char c = "";
-    //     // If char is EOF end the program
-    //     while((c == getchar()) != EOF) {
-    //         // Read until a newline
-    //         while(c != '\n') {
-                
-    //         }
-            
-    //         fgets(buffer, BUFLEN, fp);
-
-    //         printf("%s", buffer);
-
-    //         ++fp;
-    //     }
-    // }
     return(0);
 }
