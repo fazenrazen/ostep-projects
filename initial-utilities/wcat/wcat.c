@@ -14,12 +14,8 @@ int main(int argc, char *argv[]) {
         FILE *fp = fopen(argv[file], "r");
 
         // check if NULL is error
-        if(fp == NULL && ferror(fp)) {
-            printf("cannot open file, errored out \n");
-            exit(1);
-        }
-        else if(fp == NULL && feof(fp)) {
-            printf("cannot open file, end of file \n");
+        if(fp == NULL) {
+            printf("wcat: cannot open file\n");
             exit(1);
         }
 
