@@ -24,10 +24,8 @@ int main(int argc, char *argv[]) {
         }
 
         // read the whole program
-        while(!feof(fp)) {
-            // print process
-            fgets(buffer, BUFLEN, fp);
-            printf("%s", buffer);
+        while(fgets(buffer, sizeof(buffer), fp)) {
+            printf("%s",  buffer);
         }
     }
 
